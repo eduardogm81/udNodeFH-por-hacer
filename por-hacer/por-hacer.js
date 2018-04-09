@@ -18,6 +18,10 @@ const cargarDb = (  ) => {
     }
 };
 
+const buscaTarea = ( descripcion ) => {
+    return listadoPorHacer.findIndex( tarea => tarea.descripcion === descripcion );
+};
+
 const crear = ( descripcion ) => {
 
     cargarDb();
@@ -53,8 +57,30 @@ const actualizar = ( descripcion, completado = true ) => {
 
 };
 
+const borrar = ( descripcion ) => {
+    cargarDb();
+
+    /*let index = buscaTarea(descripcion);
+    if (index >= 0) {
+        listadoPorHacer.splice(index, 1);
+        guardarDB();
+        return true;
+    }
+    return false;
+    */
+    // Otra forma
+    let nuevoListado = listadoPorHacer.filter( tarea => tarea.descripcion !== descripcion );
+    if (listadoPorHacer.length === nuevoListado.length) {
+        return false;
+    }
+    listadoPorHacer = nuevoListado;
+    guardarDB();
+    return true;
+};
+
 module.exports = {
     crear,
     getListado,
-    actualizar
+    actualizar,
+    borrar
 };
