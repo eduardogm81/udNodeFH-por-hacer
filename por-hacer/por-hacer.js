@@ -33,6 +33,12 @@ const crear = ( descripcion ) => {
     return porHacer;
 };
 
+const getListado = () => {
+    cargarDb();
+    return listadoPorHacer;
+};
+
 module.exports = {
-    crear
+    crear,
+    getListado
 };
